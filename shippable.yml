@@ -5,14 +5,15 @@ build_image: drydock/u12nod:prod
 
 # Version number
 node_js:
-  - 0.12
+  - 0.11
+  
 
 # The path for Xunit to output test reports
 env:
   - XUNIT_FILE=shippable/testresults/result.xml
 
 install:
-  - source ~/.nvm/nvm.sh && nvm install 0.12
+ # - source ~/.nvm/nvm.sh && nvm install 0.12
   - node --version
   - npm install
 #  - . installMongo.sh
@@ -34,8 +35,10 @@ script:
 after_script:
   - ./node_modules/.bin/istanbul cover grunt -- -u tdd
   - ./node_modules/.bin/istanbul report cobertura --dir  shippable/codecoverage/
+  
 notifications:  
   irc: 
     pull_request: true
     channels:
       - "chat.freenode.net#test-irc"
+      - "chat.freenode.net#test-cock"
